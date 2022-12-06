@@ -155,7 +155,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\include\rs232\rs232.c" />
     <ClCompile Include="pose.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\attitude\attitude.hpp" />
+    <ClInclude Include="..\include\rs232\rs232.h" />
+    <ClInclude Include="..\include\rs232\USBSerial.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
