@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pose", "pose\pose.vcxproj", "{F1AB7345-F39B-4F38-A98E-DEC0586CD18C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serial_rs232", "serial_rs232\serial_rs232.vcxproj", "{9DBA045A-9548-4BBA-B797-F2F179F79E41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{F1AB7345-F39B-4F38-A98E-DEC0586CD18C}.Release|x64.Build.0 = Release|x64
 		{F1AB7345-F39B-4F38-A98E-DEC0586CD18C}.Release|x86.ActiveCfg = Release|Win32
 		{F1AB7345-F39B-4F38-A98E-DEC0586CD18C}.Release|x86.Build.0 = Release|Win32
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Debug|x64.ActiveCfg = Debug|x64
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Debug|x64.Build.0 = Debug|x64
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Debug|x86.ActiveCfg = Debug|Win32
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Debug|x86.Build.0 = Debug|Win32
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x64.ActiveCfg = Release|x64
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x64.Build.0 = Release|x64
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x86.ActiveCfg = Release|Win32
+		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
