@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <librealsense2/rs.hpp>
+#include "..\include\librealsense2\rs.hpp"
 #include <algorithm>
 
 //////////////////////////////

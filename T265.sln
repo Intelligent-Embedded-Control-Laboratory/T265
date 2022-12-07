@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pose_camera", "pose_camera\pose_camera.vcxproj", "{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -36,6 +38,14 @@ Global
 		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x64.Build.0 = Release|x64
 		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x86.ActiveCfg = Release|Win32
 		{9DBA045A-9548-4BBA-B797-F2F179F79E41}.Release|x86.Build.0 = Release|Win32
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Debug|x64.ActiveCfg = Debug|x64
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Debug|x64.Build.0 = Debug|x64
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Debug|x86.ActiveCfg = Debug|Win32
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Debug|x86.Build.0 = Debug|Win32
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Release|x64.ActiveCfg = Release|x64
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Release|x64.Build.0 = Release|x64
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Release|x86.ActiveCfg = Release|Win32
+		{0E21E799-D04B-4E43-8AE7-2233CC1F9C76}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

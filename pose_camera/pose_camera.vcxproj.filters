@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pose.cpp">
+    <ClCompile Include="pose_camera.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="..\include\rs232\rs232.c">
@@ -23,17 +23,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\attitude\attitude.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\rs232\rs232.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="..\include\rs232\USBSerial.hpp">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\attitude\attitude.hpp">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
   </ItemGroup>
 </Project>
