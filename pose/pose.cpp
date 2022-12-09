@@ -1,8 +1,10 @@
 ﻿// License: Apache 2.0. See LICENSE file in root directory.
 // Copyright(c) 2019 Intel Corporation. All Rights Reserved.
-#include <librealsense2/rs.hpp>
 #include <iostream>
+#include <thread>
+#include <chrono>
 #include <iomanip>
+#include <librealsense2/rs.hpp>
 #include "example-utils.hpp"
 #include "..\include\rs232\USBSerial.hpp"
 #include "..\include\attitude\attitude.hpp"
@@ -30,14 +32,13 @@ typedef struct /* T265 serial data transmission data structure */
 	float Q[4]; // Quaternion 
 	int confidence; // Confidence
 } uart_data_t;
+// END OF USER TYPEDEFS
 
 enum T265_STATUS : int
 {
 	T265_DETECT_NAN = -1,
 	T265_OK
 };
-// END OF USER TYPEDEFS
-
 
 USBSerial Serial;
 uart_data_t uart_data;
@@ -67,6 +68,47 @@ float quat_sensor_alignment[4] = { //失敗，T265 吐出來的不太準，可�
 	-QUATERNION_SENSOR_ALIGNMENT_Z
 };
 
+void print_concole()
+{
+	for (;;)
+	{
+		auto ms = std::chrono::steady_clock::now() + std::chrono::milliseconds(1000);
+		/* Convert T265 quaternion data to Euler angle*/
+		Attitude::quaternion_to_euler(uart_data.Q, euler);
+		Attitude::quaternion_to_euler(quat_c, euler_c);
+		for (int i = 0; i < 3; i++)
+		{
+			euler[i] *= RAD_TO_DEG; // Unit: degree
+			euler_c[i] *= RAD_TO_DEG; // Unit: degree
+		}
+
+		//std::cout << setprecision(6) << fixed << uart_data.Q[0] << " " << uart_data.Q[1] << " " << uart_data.Q[2] << " " << uart_data.Q[3] << "\n";
+		/*std::cout << setprecision(5) << fixed;
+		std::cout << euler[0] << " " << euler_c[0] << " "
+			<< euler[1] << " " << euler_c[1] << " "
+			<< euler[2] << " " << euler_c[2] << "\n";*/
+			/*std::cout << setprecision(3) << fixed;
+			std::cout << uart_data.Q[0] << " " << quat_c[0] << " "
+				<< uart_data.Q[1] << " " << quat_c[1] << " "
+				<< uart_data.Q[2] << " " << quat_c[2] << " "
+				<< uart_data.Q[3] << " " << quat_c[3] << "\n";*/
+				/* Print Data to Concole */
+		std::cout << std::setprecision(3) << std::fixed;
+		std::cout
+			<< uart_data.confidence << "\t"
+			<< uart_data.T[0] << "\t"
+			<< uart_data.T[1] << "\t"
+			<< uart_data.T[2] << "\t"
+			<< uart_data.V[0] << "\t"
+			<< uart_data.V[1] << "\t"
+			<< uart_data.V[2] << "\t"
+			<< euler[0] << "\t"
+			<< euler[1] << "\t"
+			<< euler[2] << "\n";
+		std::this_thread::sleep_until(ms);
+	}
+}
+
 /* Program Enter Point: */
 int main(int argc, char* argv[]) try
 {
@@ -76,6 +118,8 @@ int main(int argc, char* argv[]) try
 	fgets(num, 7, stdin);
 	cport_nr = atoi(num) - 1; // 6
 #endif
+
+	std::thread t_print(print_concole);
 
 	// 初始化 Serial RS-232 
 	if (Serial.begin(USB_SERIAL_COM_PORT, USB_SERIAL_BAUD_RATE, USB_SERIAL_FORMAT) == -1)
@@ -155,41 +199,8 @@ int main(int argc, char* argv[]) try
 		}
 
 		/* Send binary-encoded T265 data to UART */
-		Serial.write_bytes((uint8_t *) &uart_data, sizeof(uart_data_t));
+		Serial.write_bytes((uint8_t*)&uart_data, sizeof(uart_data_t));
 
-		/* Convert T265 quaternion data to Euler angle*/
-		Attitude::quaternion_to_euler(uart_data.Q, euler);
-		Attitude::quaternion_to_euler(quat_c, euler_c);
-		for (int i = 0; i < 3; i++)
-		{
-			euler[i] *= RAD_TO_DEG; // Unit: degree
-			euler_c[i] *= RAD_TO_DEG; // Unit: degree
-		}
-
-		//std::cout << setprecision(6) << fixed << uart_data.Q[0] << " " << uart_data.Q[1] << " " << uart_data.Q[2] << " " << uart_data.Q[3] << "\n";
-		/*std::cout << setprecision(5) << fixed;
-		std::cout << euler[0] << " " << euler_c[0] << " "
-			<< euler[1] << " " << euler_c[1] << " "
-			<< euler[2] << " " << euler_c[2] << "\n";*/
-			/*std::cout << setprecision(3) << fixed;
-			std::cout << uart_data.Q[0] << " " << quat_c[0] << " "
-				<< uart_data.Q[1] << " " << quat_c[1] << " "
-				<< uart_data.Q[2] << " " << quat_c[2] << " "
-				<< uart_data.Q[3] << " " << quat_c[3] << "\n";*/
-
-		/* Print Data to Concole */
-		std::cout << std::setprecision(3) << std::fixed;
-		std::cout
-			<< uart_data.confidence << "\t"
-			<< uart_data.T[0] << "\t"
-			<< uart_data.T[1] << "\t"
-			<< uart_data.T[2] << "\t"
-			<< uart_data.V[0] << "\t"
-			<< uart_data.V[1] << "\t"
-			<< uart_data.V[2] << "\t"
-			<< euler[0] << "\t"
-			<< euler[1] << "\t"
-			<< euler[2] << "\n";
 
 		if (T265_status == T265_DETECT_NAN)
 		{
