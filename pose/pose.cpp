@@ -2,6 +2,7 @@
 // Copyright(c) 2019 Intel Corporation. All Rights Reserved.
 #include <iostream>
 #include <thread>
+#include <windows.h> // 設定優先權
 #include <chrono>
 #include <iomanip>
 #include <librealsense2/rs.hpp>
@@ -118,9 +119,9 @@ int main(int argc, char* argv[]) try
 	fgets(num, 7, stdin);
 	cport_nr = atoi(num) - 1; // 6
 #endif
-
 	std::thread t_print(print_concole);
 
+	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
 	// 初始化 Serial RS-232 
 	if (Serial.begin(USB_SERIAL_COM_PORT, USB_SERIAL_BAUD_RATE, USB_SERIAL_FORMAT) == -1)
 	{

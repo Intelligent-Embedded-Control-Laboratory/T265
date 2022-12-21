@@ -6,6 +6,7 @@
 #include <thread>
 #include <chrono>
 #include <queue>
+#include <windows.h> // 設定優先權
 
 // OpenCV
 #include <opencv2/opencv.hpp>
@@ -122,7 +123,9 @@ void camera_control()
 	snprintf(date_str, sizeof(date_str), "%4d_%02d_%02d", sys.wYear, sys.wMonth, sys.wDay);
 
 	// 創立資料夾
-	folder = date_str;
+	folder = "C:/Users/IEC5892M/Desktop/FPV_Capture/";
+	folder += date_str;
+	//folder = date_str;
 	folder += "/";
 	if (_access(folder.c_str(), 0) == -1) // -1 代表沒有資料夾
 	{
@@ -199,8 +202,8 @@ int main()
 	std::thread t_camera(camera_control);
 	std::thread t_console(print_console);
 
-	//std::queue<int> q;
-
+	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
+	
 	// Open Serial
 	if (Serial.begin(USB_SERIAL_COM_PORT, USB_SERIAL_BAUD_RATE, USB_SERIAL_FORMAT) == -1)
 	{
